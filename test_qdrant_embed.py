@@ -5,7 +5,7 @@ import uuid
 
 client = QdrantClient(url="http://localhost:6333")
 
-docs = chunk_document('data/article3.txt')
+docs = chunk_document('data/article2.txt')
 
 document_id = str(uuid.uuid4())
 
@@ -28,3 +28,5 @@ for idx, chunk in enumerate(docs):
             )
         ]
     )
+
+print("Success.")

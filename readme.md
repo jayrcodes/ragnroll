@@ -30,6 +30,14 @@ python -m venv venv
 source venv/bin/activate
 ```
 
+How to verify what venv is activated
+
+```
+echo $VIRTUAL_ENV
+# or 
+which python
+```
+
 How to install pip packages
 
 ```
