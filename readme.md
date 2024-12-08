@@ -3,6 +3,100 @@ Demo
 
 https://www.youtube.com/watch?v=-40SDvznhzg
 
+### Dec 8, 2024 - Webpage embedding 
+
+Enter website url, fetch content, chunk it, embed and store in Qdrant.
+
+```
+python test_qdrant_embed_webpage.py
+```
+
+Ask questions based on the stored data in Qdrant.
+
+```
+python test_chat.py
+```
+
+## Trying out Poetry
+
+Add to .zshrc
+
+```
+export VENV_PATH="$HOME/.virtualenvs/venv"
+```
+
+Install poetry into virtual environment
+
+```
+python -m venv $VENV_PATH 
+$VENV_PATH/bin/pip install -U pip setuptools
+$VENV_PATH/bin/pip install poetry
+```
+
+Add poetry to zsh
+
+```
+alias poetry="$VENV_PATH/bin/poetry"
+```
+
+Initialize poetry project
+
+```
+~/Developer/ragnroll
+poetry init
+```
+
+How to activate poetry project
+
+```
+poetry shell
+```
+
+How to add package
+
+```
+poetry add langchain
+```
+
+VSCode settings
+
+```
+{
+    "python.defaultInterpreterPath": "home/jayrpc/.cache/pypoetry/virtualenvs/ragnroll-J6asQ6za-py3.1/bin/python"
+}
+```
+
+## Installation/Setup
+
+How to create venv and activate it (Non-poetry way)
+
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+
+How to verify what venv is activated
+
+```
+echo $VIRTUAL_ENV
+```
+
+How to install pip packages
+
+```
+pip install -r requirements.txt
+```
+
+How to freeze pip packages
+
+```
+pip install pipreqs
+pipreqs . --force
+```
+
+## Usage
+
 How to store knowledge and ask questions
 
 ```
@@ -23,33 +117,7 @@ python test_qdrant_embed.py
 python test_qdrant_search.py
 ```
 
-How to create venv and activate it
-
-```
-python -m venv venv
-source venv/bin/activate
-```
-
-How to verify what venv is activated
-
-```
-echo $VIRTUAL_ENV
-# or 
-which python
-```
-
-How to install pip packages
-
-```
-pip install -r requirements.txt
-```
-
-How to freeze pip packages
-
-```
-pip install pipreqs
-pipreqs . --force
-```
+## Qdrant Database Cheatsheet
 
 How to create Qdrant instance
 

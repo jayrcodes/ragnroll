@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "ragnroll"
+version = "0.1.0"
+description = ""
+authors = ["Jay-r Albano <jayrcodes@outlook.ph>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+langchain = "^0.3.10"
+langchain-community = "^0.3.10"
+openai = "^1.57.0"
+python-dotenv = "^1.0.1"
+qdrant-client = "^1.12.1"
+beautifulsoup4 = "^4.12.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
