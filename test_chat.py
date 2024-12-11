@@ -36,6 +36,13 @@ messages = [
     {"role": "user", "content": prompt},
 ]
 
-response = chat_completion(messages)
+# response = chat_completion(messages)
+# print(response.choices[0].message.content)
 
-print(response.choices[0].message.content)
+# chat completion but streaming
+response = chat_completion(messages, stream=True)
+
+print("\n\n")
+
+for chunk in response:
+    print(chunk.choices[0].delta.content, end="", flush=True)
