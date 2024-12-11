@@ -3,6 +3,26 @@ Demo
 
 https://www.youtube.com/watch?v=-40SDvznhzg
 
+### Dec 11, 2024 - PDF embedding 
+
+Add pdf on data folder
+
+```
+data/article1.pdf
+```
+
+Embed and store in Qdrant
+
+```
+python test_qdrant_embed_pdf.py
+```
+
+Ask questions based on the stored data in Qdrant.
+
+```
+python test_chat.py
+```
+
 ### Dec 8, 2024 - Webpage embedding 
 
 Enter website url, fetch content, chunk it, embed and store in Qdrant.
