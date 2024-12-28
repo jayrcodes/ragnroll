@@ -3,6 +3,19 @@ Demo
 
 https://www.youtube.com/watch?v=-40SDvznhzg
 
+### Dec 28, 2024 - Start API
+
+```
+uvicron main:app --port 8100 --reload
+```
+
+Available API
+
+```
+POST /embed/webpage
+POST /chat
+```
+
 ### Dec 11, 2024 - PDF embedding 
 
 Add pdf on data folder
@@ -76,6 +89,12 @@ How to add package
 
 ```
 poetry add langchain
+```
+
+Install packages if there's new update on pyproject.toml
+
+```
+poetry install --no-root
 ```
 
 VSCode settings
