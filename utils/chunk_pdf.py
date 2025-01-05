@@ -7,3 +7,8 @@ def chunk_pdf(pdf_path):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     docs = text_splitter.split_documents(documents)
     return docs
+
+def pdf_metadata(pdf_path):
+    loader = PyMuPDFLoader(pdf_path)
+    documents = loader.load()
+    return documents[0].metadata

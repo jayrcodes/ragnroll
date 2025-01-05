@@ -187,4 +187,25 @@ POST collections/acme/points/scroll
 
 # list all collections
 GET collections
+
+# search by: filter must match
+POST /collections/acme/points/scroll
+{
+    "filter": {
+        "must": [
+            { "key": "metadata_title", "match": { "value": "AMD Preps Ryzen 9 9955HX3D \"Fire Range\" CPU For Enthusiast Laptops, Arrow Lake-HX Doesn't Bring Big Performance Jump" } }
+        ]
+    }
+}
+
+# delete by: filter must match
+POST /collections/acme/points/delete
+{
+    "filter": {
+        "must": [
+            { "key": "metadata_title", "match": { "value": "AMD Preps Ryzen 9 9955HX3D \"Fire Range\" CPU For Enthusiast Laptops, Arrow Lake-HX Doesn't Bring Big Performance Jump" } }
+        ]
+    }
+}
+
 ```
