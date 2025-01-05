@@ -24,7 +24,10 @@ async def embed_webpage(request: WebpageRequest):
     url = request.url
 
     docs = chunk_webpage(url)
-    qdrant_embed_docs(docs)
+
+    qdrant_embed_docs(docs, {
+        "url": url.strip()
+    })
     
     return docs
 

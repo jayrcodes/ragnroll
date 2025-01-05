@@ -10,4 +10,6 @@ title = pdf_metadata(pdf_path)["title"]
 
 print_doc_chunks(docs)
 
-qdrant_embed_docs(docs, title)
+qdrant_embed_docs(docs, {
+    "document_title": title
+})
