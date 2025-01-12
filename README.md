@@ -209,3 +209,11 @@ POST /collections/acme/points/delete
 }
 
 ```
+
+## ffmpeg
+
+Convert video to audio
+
+```
+ffmpeg -i input_video.mp4 -q:a 0 -map a output_audio.mp3
+```
