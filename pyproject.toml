@@ -19,6 +19,7 @@ transformers = "^4.47.1"
 fastapi = "^0.115.6"
 uvicorn = "^0.34.0"
 pydash = "^8.0.4"
+langchain-ollama = "^0.2.2"
 
 
 [build-system]
