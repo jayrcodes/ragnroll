@@ -1,6 +1,9 @@
 import os
+import time
 import subprocess
-
+from rich.console import Console
+from rich.markdown import Markdown
+from datetime import datetime
 from utils.chat_completions import chat_completion
 from utils.config import CODE_REVIEW_PROJECT_PATH, CODE_REVIEW_CURRENT_BRANCH, CODE_REVIEW_PRODUCTION_BRANCH
 
@@ -90,12 +93,34 @@ def review_code(file_path):
     ]
 
     try:
-        response = chat_completion(messages, stream=True)
+        start = time.time()
+        # timestamp formatted
+        print("Start time: ", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+
+        response = chat_completion(messages, stream=False)
+        # response = chat_completion(messages, stream=True)
         if response is None:
             print("Error: No response received from chat completion")
             return
 
-        for chunk in response:
+
+        # print_stream(response)
+
+        markdown_response = response.choices[0].message.content
+        markdown = Markdown(markdown_response)
+        console = Console()
+        console.print(markdown)
+
+        end = time.time()
+        print("\nEnd time: ", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        # include units
+        print("Time taken: ", end - start, " seconds")
+
+    except Exception as e:
+        print(f"Error during code review: {str(e)}")
+
+def print_stream(response):
+    for chunk in response:
             if chunk and hasattr(chunk, 'choices') and chunk.choices and hasattr(chunk.choices[0], 'delta'):
                 content = chunk.choices[0].delta.content
                 if content is not None:
@@ -103,9 +128,6 @@ def review_code(file_path):
             # else if chunks has attribute data
             elif hasattr(chunk, 'data'):
                 print(chunk.data)
-
-    except Exception as e:
-        print(f"Error during code review: {str(e)}")
 
 def review_files():
     files = get_files_with_length(get_files())
@@ -120,10 +142,10 @@ def review_files():
         else:
             # print(file["path"], "String length: " + str(file["length"]))
 
-            print("================================\n\n")
-            print(file["path"], "\n\n")
+            print("================================\n")
+            print(file["path"], "\n")
             review_code(file["path"])
-            print("\n\n")
+            print("\n")
 
 # review_code("app/Http/Controllers/Api/Hub/Scout/ScoutQueriesController.php")
 # review_code("app/Services/Audience/AudienceService.php")
