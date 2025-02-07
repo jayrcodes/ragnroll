@@ -21,6 +21,8 @@ pydash = "^8.0.4"
 langchain-ollama = "^0.2.2"
 openai = "^1.60.0"
 rich = "^13.9.4"
+langchain-openai = "^0.3.4"
+langchain-core = "^0.3.34"
 
 
 [build-system]
