@@ -2,6 +2,8 @@ import json
 import traceback
 from utils.chat_completions import chat_completion
 from utils.terminal import clear_terminal, print_stream, print_markdown
+import pydash
+from utils.config import ENABLE_TRY_CATCH_AI
 
 def pretty_print_error(e):
     exception_data = {
@@ -35,7 +37,6 @@ def simplify_error(error = None):
             {"role": "user", "content": prompt},
         ]
 
-        # chat completion but streaming
         response = chat_completion(messages, stream=True)
 
         clear_terminal()
@@ -47,9 +48,27 @@ def simplify_error(error = None):
         markdown = f"- AI Simplified Error:\n\n{markdown}"
         print_markdown(markdown)
 
-def try_with_ai(function, *args, **kwargs):
+def short_traceback(e):
+    tb = traceback.format_exception(type(e), e, e.__traceback__)
+    return "".join(tb[-3:])
+
+def try_catch(function, *args, **kwargs):
     try:
-        return function(*args, **kwargs)
+        response = function(*args, **kwargs)
+        return [response, None]
     except Exception as e:
-        simplify_error(e)
+
+        if ENABLE_TRY_CATCH_AI:
+            simplify_error(e)
+        else:
+            text = short_traceback(e)
+            markdown = f"- Shorter Error:\n\n```\n{text}\n```"
+            print_markdown(markdown)
+
+        return [None, e]
+
+def print_exit_if_error(e = None):
+    if e:
+        print("\n")
+        print(e)
         exit()

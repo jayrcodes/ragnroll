@@ -11,4 +11,5 @@ def chat_completion(messages, stream=False):
         stream=stream,
         messages=messages,
         temperature=0.7,
+        timeout=2.0
     )

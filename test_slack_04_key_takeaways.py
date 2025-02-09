@@ -1,6 +1,6 @@
 from utils.chat_completions import chat_completion
 from utils.terminal import clear_terminal, print_stream, print_markdown
-from utils.error import try_with_ai
+from utils.error import try_catch, print_exit_if_error
 
 def key_takeaways():
     def read_thread_messages():
@@ -11,7 +11,8 @@ def key_takeaways():
 
         return context
 
-    context = try_with_ai(read_thread_messages)
+    [context, error] = try_catch(read_thread_messages)
+    print_exit_if_error(error)
 
     prompt = f"""
     Context:

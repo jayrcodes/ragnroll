@@ -1,18 +1,21 @@
 import json
 import pydash
 import re
-from utils.error import try_with_ai
+from utils.error import try_catch, print_exit_if_error
 from utils.slack import conversation_replies
 
 def get_thread_messages():
     def get_slack_curl(): return open('data/slack_curl.txt', 'r').read()
-    slack_curl = try_with_ai(get_slack_curl)
+    [slack_curl, error] = try_catch(get_slack_curl)
+    print_exit_if_error(error)
 
     def get_channel_id(): return re.search(r'\"channel\"\\r\\n\\r\\n([A-Z0-9]+)', slack_curl).group(1)  
-    channel_id = try_with_ai(get_channel_id)
+    [channel_id, error] = try_catch(get_channel_id)
+    print_exit_if_error(error)
 
     def get_ts(): return re.search(r'\"ts\"\\r\\n\\r\\n([0-9.]+)', slack_curl).group(1)
-    ts = try_with_ai(get_ts)
+    [ts, error] = try_catch(get_ts)
+    print_exit_if_error(error)
 
     # channel_id = pydash.get(sys.argv, 1)
     # if not channel_id:
@@ -22,15 +25,19 @@ def get_thread_messages():
     # if not ts:
     #     raise ValueError("Thread timestamp is required")
 
-    data = try_with_ai(lambda: conversation_replies(channel_id=channel_id, ts=ts))
+    [data, error] = try_catch(lambda: conversation_replies(channel_id=channel_id, ts=ts))
+    print_exit_if_error(error)
 
     def get_users(): return json.load(open('data/slack_users.json', 'r'))       
-    users = try_with_ai(get_users)
+    [users, error] = try_catch(get_users)
+    print_exit_if_error(error)
 
     def write_thread_messages():
         with open('data/slack_thread_messages.txt', 'w') as file:
             file.write('')
-    try_with_ai(write_thread_messages)
+
+    [_, error] = try_catch(write_thread_messages)
+    print_exit_if_error(error)
 
     def write_thread_messages():
         for message in data['messages']:
@@ -41,8 +48,9 @@ def get_thread_messages():
                 file.write(name + ":")
                 file.write(message['text'] + "\n")
 
-    try_with_ai(write_thread_messages)
+    [_, error] = try_catch(write_thread_messages)
+    print_exit_if_error(error)
 
-    print("Done. Check data/slack_thread_messages.txt")
+    print("\nDone. Check data/slack_thread_messages.txt\n")
 
 get_thread_messages()
