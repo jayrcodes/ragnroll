@@ -1,10 +1,7 @@
 from utils.chat_completions import chat_completion
 from rich.console import Console
 from rich.markdown import Markdown
-
-def clear_terminal():
-    print("\033c", end="")
-    print("\n\n\n")
+from utils.terminal import clear_terminal
 
 def key_takeaways():
     # read data/slack_thread_messages.txt
@@ -16,6 +13,7 @@ def key_takeaways():
     {context}
 
     Task:
+    first generate a title for the summary, and then
     give me key takeaways keep it short simple english and categorize them.
     and then provide at the end a possible action items.
     """

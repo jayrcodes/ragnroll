@@ -3,7 +3,7 @@ import sys
 import json
 import pydash
 import re
-from utils.config import SLACK_API_ENDPOINT, SLACK_API_TOKEN, SLACK_UNREAD_CHANNEL_ID, SLACK_COOKIE
+from utils.config import SLACK_API_ENDPOINT, SLACK_API_TOKEN, SLACK_COOKIE
 
 
 def conversation_replies(channel_id, ts):

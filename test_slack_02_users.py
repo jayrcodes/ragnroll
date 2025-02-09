@@ -1,7 +1,7 @@
 import requests
 import pydash
 import json
-from utils.config import SLACK_API_ENDPOINT, SLACK_API_TOKEN, SLACK_UNREAD_CHANNEL_ID, SLACK_COOKIE
+from utils.config import SLACK_API_ENDPOINT, SLACK_API_TOKEN, SLACK_COOKIE
 
 def users():
     url = f"{SLACK_API_ENDPOINT}/api/users.list"
