@@ -3,6 +3,14 @@ Demo
 
 https://www.youtube.com/watch?v=-40SDvznhzg
 
+### Jun 17, 2025 - updated test_transcribe_mac.py
+
+```
+# example
+poetry shell
+python test_transcribe_mac.py ~/Desktop/2025-06-16\ 21-33-14.mkv
+```
+
 ### Dec 28, 2024 - Start API
 
 ```
